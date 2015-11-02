@@ -1,0 +1,3 @@
+[submodule "Assets/SMFShared"]
+	path = Assets/SMFShared
+	url = git@github.com:darthcoder1/SMFShared.git
