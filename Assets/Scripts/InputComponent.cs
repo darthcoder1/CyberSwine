@@ -4,139 +4,67 @@ using System.Collections.Generic;
 using System.Reflection;
 
 
-public class TouchCreator
+
+public class InputComponent : MonoBehaviour
 {
-    //static BindingFlags flag = BindingFlags.Instance | BindingFlags.NonPublic;
-    static Dictionary<string, FieldInfo> fields;
+	private SMF.TouchHandler touchHandler;
 
-    object touch;
+	public float MaxRotationSpeed = 100.0f;
 
-    public float deltaTime { get { return ((Touch)touch).deltaTime; } set { fields["m_TimeDelta"].SetValue(touch, value); } }
-    public int tapCount { get { return ((Touch)touch).tapCount; } set { fields["m_TapCount"].SetValue(touch, value); } }
-    public TouchPhase phase { get { return ((Touch)touch).phase; } set { fields["m_Phase"].SetValue(touch, value); } }
-    public Vector2 deltaPosition { get { return ((Touch)touch).deltaPosition; } set { fields["m_PositionDelta"].SetValue(touch, value); } }
-    public int fingerId { get { return ((Touch)touch).fingerId; } set { fields["m_FingerId"].SetValue(touch, value); } }
-    public Vector2 position { get { return ((Touch)touch).position; } set { fields["m_Position"].SetValue(touch, value); } }
-    public Vector2 rawPosition { get { return ((Touch)touch).rawPosition; } set { fields["m_RawPosition"].SetValue(touch, value); } }
+	public float VelcocityChangeSpeed = 10.0f;
+	public float MaxVelocity = 50.0f;
+	public float MinVelocity = 0.0f;
 
-    public Touch Create()
-    {
-        return (Touch)touch;
-    }
+	public float MaxPositionDelta = 25.0f;
 
-    public TouchCreator()
-    {
-        touch = new Touch();
-    }
-
-    static TouchCreator()
-    {
-        fields = new Dictionary<string, FieldInfo>();
-        foreach (var f in typeof(Touch).GetFields(BindingFlags.Instance | BindingFlags.NonPublic))
-        {
-            fields.Add(f.Name, f);
-        }
-    }
-}
-
-public class InputComponent : MonoBehaviour 
-{
-    private static TouchCreator lastFakeTouch;
-
-    public float MaxRotationSpeed = 100.0f;
-
-    public float VelcocityChangeSpeed = 10.0f;
-    public float MaxVelocity = 50.0f;
-    public float MinVelocity = 0.0f;
-    
-    public float MaxPositionDelta = 25.0f;
-
-    private float CurrentSpeed = 0.0f;
+	private float CurrentSpeed = 0.0f;
 
 	// Use this for initialization
-	void Start () 
-    {
-    }
+	void Start()
+	{
+		touchHandler = new SMF.TouchHandler();
+	}
 
-    public static List<Touch> GetTouches()
-    {
-        List<Touch> touches = new List<Touch>();
-        touches.AddRange(Input.touches);
-#if UNITY_EDITOR
-        if (!Input.touchSupported)
-        {
-            if (lastFakeTouch == null) lastFakeTouch = new TouchCreator();
-            if (Input.GetMouseButtonDown(0))
-            {
-                lastFakeTouch.phase = TouchPhase.Began;
-                lastFakeTouch.deltaPosition = new Vector2(0, 0);
-                lastFakeTouch.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                lastFakeTouch.fingerId = 0;
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                lastFakeTouch.phase = TouchPhase.Ended;
-                Vector2 newPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                lastFakeTouch.deltaPosition = newPosition - lastFakeTouch.position;
-                lastFakeTouch.position = newPosition;
-                lastFakeTouch.fingerId = 0;
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                lastFakeTouch.phase = TouchPhase.Moved;
-                Vector2 newPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                lastFakeTouch.deltaPosition = newPosition - lastFakeTouch.position;
-                lastFakeTouch.position = newPosition;
-                lastFakeTouch.fingerId = 0;
-            }
-            else
-            {
-                lastFakeTouch = null;
-            }
-            if (lastFakeTouch != null) touches.Add(lastFakeTouch.Create());
-        }
-#endif
-        return touches;
-    }
-	
+
+
 	// Update is called once per frame
-	void Update () 
-    {
-        Touch[] touches = GetTouches().ToArray();
+	void Update()
+	{
+		Touch[] touches = touchHandler.GetTouches();
 
-        if (touches.Length == 1)
-        {
-            UpdateSingleTouch(touches[0]);
-        }
-    }
+		if (touches.Length == 1)
+		{
+			UpdateSingleTouch(touches[0]);
+		}
+	}
 
-    void UpdateSingleTouch(Touch touch)
-    {
-        float deltaX = touch.deltaPosition.x;
-        float deltaY = touch.deltaPosition.y;
+	void UpdateSingleTouch(Touch touch)
+	{
+		float deltaX = touch.deltaPosition.x;
+		float deltaY = touch.deltaPosition.y;
 
-        if (Mathf.Abs(deltaX) > Mathf.Abs(deltaY))
-        {
-            deltaX = Mathf.Clamp(deltaX, -MaxPositionDelta, MaxPositionDelta);
-            float angle = MaxRotationSpeed * Time.deltaTime * -deltaX;
-            transform.Rotate(new Vector3(0, 0, angle));
-        }
+		if (Mathf.Abs(deltaX) > Mathf.Abs(deltaY))
+		{
+			deltaX = Mathf.Clamp(deltaX, -MaxPositionDelta, MaxPositionDelta);
+			float angle = MaxRotationSpeed * Time.deltaTime * -deltaX;
+			transform.Rotate(new Vector3(0, 0, angle));
+		}
 
-        if (Mathf.Abs(deltaY) > Mathf.Abs(deltaX))
-        {
-            float accelerationFactor = Mathf.Clamp(deltaY, -MaxPositionDelta, MaxPositionDelta) / MaxPositionDelta;
-            CurrentSpeed = Mathf.Clamp(CurrentSpeed + (VelcocityChangeSpeed * Time.deltaTime * accelerationFactor), MinVelocity, MaxVelocity);
-        }
+		if (Mathf.Abs(deltaY) > Mathf.Abs(deltaX))
+		{
+			float accelerationFactor = Mathf.Clamp(deltaY, -MaxPositionDelta, MaxPositionDelta) / MaxPositionDelta;
+			CurrentSpeed = Mathf.Clamp(CurrentSpeed + (VelcocityChangeSpeed * Time.deltaTime * accelerationFactor), MinVelocity, MaxVelocity);
+		}
 
-        Vector3 originalDir = new Vector3(0.0f, -1.0f, 0.0f);
-        Vector3 newDir = transform.rotation * originalDir;  
+		Vector3 originalDir = new Vector3(0.0f, -1.0f, 0.0f);
+		Vector3 newDir = transform.rotation * originalDir;
 
-        Vector3 lineStart = transform.position;
-        Debug.DrawLine(lineStart, lineStart + newDir * CurrentSpeed/MaxVelocity, Color.red);   
-    }
+		Vector3 lineStart = transform.position;
+		Debug.DrawLine(lineStart, lineStart + newDir * CurrentSpeed / MaxVelocity, Color.red);
+	}
 
-    void UpdateMultiTouch()
-    {
+	void UpdateMultiTouch()
+	{
 
-    }
+	}
 }
