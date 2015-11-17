@@ -28,12 +28,18 @@ public class StandardProjectile : MonoBehaviour
 
 	void OnBecameInvisible()
 	{
-		Debug.LogWarning("Invisible");
 		GameObject.Destroy(gameObject);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.LogWarning("HIT: " + other.name);
+		//Debug.LogWarning("HIT: " + other.name);
+
+		if (other.gameObject.tag == "Enemy")
+		{
+			EnemyController ctrl = other.gameObject.GetComponent<EnemyController>();
+			ctrl.HitByProjectile(this);
+			GameObject.Destroy(gameObject);
+		}
 	}
 }
