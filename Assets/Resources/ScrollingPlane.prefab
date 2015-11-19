@@ -82,10 +82,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 136608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfc026f85bb868498b8662f0f17bb76, type: 3}
+  m_Script: {fileID: 11500000, guid: ce3b736055d797346926587ceb9c53d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panSpeed: {x: 0, y: -.400000006}
+  useGlobalSpeed: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
