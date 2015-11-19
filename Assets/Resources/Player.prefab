@@ -13,6 +13,8 @@ GameObject:
   - 114: {fileID: 11404300}
   - 58: {fileID: 5835332}
   - 114: {fileID: 11424018}
+  - 114: {fileID: 11473470}
+  - 50: {fileID: 5043012}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -32,6 +34,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5043012
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195940}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &5835332
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -71,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 120934, guid: 7fe9c953ae062b04db1573050b8cf884, type: 2}
-  refireRate: .5
+  refireRate: .349999994
   numShots: 1
 --- !u!114 &11464730
 MonoBehaviour:
@@ -89,6 +107,18 @@ MonoBehaviour:
   MaxVelocity: 50
   MinVelocity: 0
   MaxPositionDelta: 25
+--- !u!114 &11473470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b3786270a198749b573d03b5023b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShooting: 1
 --- !u!212 &21252764
 SpriteRenderer:
   m_ObjectHideFlags: 1

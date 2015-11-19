@@ -26,7 +26,7 @@ public class StandardWeapon : MonoBehaviour
 	{
 		timeSinceLastShot += Time.deltaTime;
 
-		if (timeSinceLastShot >= refireRate)
+		if (timeSinceLastShot >= refireRate && playerCtrl.isShooting)
 		{
 			timeSinceLastShot = 0.0f;
 

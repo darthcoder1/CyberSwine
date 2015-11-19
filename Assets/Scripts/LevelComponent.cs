@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelComponent : MonoBehaviour {
+public class LevelComponent : MonoBehaviour 
+{
 
 	// Use this for initialization
 	void Start () 

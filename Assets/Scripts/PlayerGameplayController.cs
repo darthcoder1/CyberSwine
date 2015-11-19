@@ -16,4 +16,15 @@ public class PlayerGameplayController : MonoBehaviour {
 	{
 	
 	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		//Debug.LogWarning("HIT: " + other.name);
+
+		if (other.gameObject.tag == "Enemy")
+		{
+			EnemyController ctrl = other.gameObject.GetComponent<EnemyController>();
+			ctrl.CollisionWith(this);
+		}
+	}
 }
