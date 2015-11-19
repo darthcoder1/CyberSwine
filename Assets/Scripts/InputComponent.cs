@@ -21,12 +21,6 @@ public class InputComponent : MonoBehaviour
 	void Start()
 	{
 		touchHandler = new SMF.TouchHandler();
-
-// 
-// 		SMF.Procedural.GeneratorSettings settings = new SMF.Procedural.GeneratorSettings();
-// 		settings.gridWidth = 10;
-// 		settings.gridHeight = 30;
-// 		SMF.Procedural.LevelGenerator.Generate(settings);
 	}
 
 	// Update is called once per frame

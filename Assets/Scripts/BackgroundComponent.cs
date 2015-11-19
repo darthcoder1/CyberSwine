@@ -6,13 +6,13 @@ public class BackgroundComponent : SMF.SpriteAnimationComponent
 	public bool useGlobalSpeed = true;
 
 	// Use this for initialization
-	void Start () 
+	public new void Start () 
 	{
 		base.Start();
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public new void Update() 
 	{
 		if (useGlobalSpeed)
 		{
