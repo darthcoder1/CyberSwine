@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a35b0a9d6be2741ae8d11a33c8c116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  speed: 0
+  maxHealth: 5
+  speed: 5
   destroyWhenOutOfScreen: 1
 --- !u!212 &21260418
 SpriteRenderer:
@@ -110,6 +110,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxHealth
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
