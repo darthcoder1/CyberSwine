@@ -56,13 +56,13 @@ MonoBehaviour:
   enemyCountOverTime:
     serializedVersion: 2
     m_Curve:
-    - time: 0
-      value: 15.0053368
+    - time: -.00978916138
+      value: 25.0608101
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
-      value: 15.0053368
+    - time: 300.803284
+      value: 40.0174332
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -71,21 +71,21 @@ MonoBehaviour:
   enemySquadronSize:
     serializedVersion: 2
     m_Curve:
-    - time: 0
-      value: 3.12725925
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
     - time: 1
       value: 3.12725925
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+    - time: 299.31134
+      value: 5.01089907
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  enemyFormationOffset: 1
+  enemyFormationOffset: 1.25
   zPos: -.25
-  spawnInterval: 7.5
+  spawnInterval: 5
   EnemyTemplate_BasicEnemy: {fileID: 116932, guid: 5ff9272f3242f5a46a0992b80e8ccbb7,
     type: 2}
 --- !u!212 &21285436
