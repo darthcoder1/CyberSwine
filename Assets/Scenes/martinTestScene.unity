@@ -220,6 +220,10 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9598234, guid: 94f3151c90822ac468937f9ce9cfa9fb, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b986b254ffdd45ee9cd9a1365e5e1cb, type: 2}
     m_RemovedComponents:
     - {fileID: 11464730, guid: 94f3151c90822ac468937f9ce9cfa9fb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 94f3151c90822ac468937f9ce9cfa9fb, type: 2}
@@ -660,7 +664,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!114 &2114412716
 MonoBehaviour:
   m_ObjectHideFlags: 0
