@@ -14,6 +14,7 @@ public class LevelComponent : MonoBehaviour
 	}
 
 	public float globalScrollSpeed = 4;
+	public float spawnZPosition = -0.25f;
 
 	// Use this for initialization
 	void Start () 
@@ -25,5 +26,14 @@ public class LevelComponent : MonoBehaviour
 	void Update () 
 	{
 	
+	}
+
+	public Vector3 GenerateRandomSpawnPosition()
+	{
+		float xPos = Mathf.Clamp(Random.value, 0.2f, 0.8f) * Screen.width;
+		float yPos = Screen.height * 1.5f;
+		Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(xPos, yPos));
+		worldPos.z = spawnZPosition;
+		return worldPos;
 	}
 }

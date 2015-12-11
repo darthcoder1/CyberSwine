@@ -9,7 +9,6 @@ public class FreeEnemySpawner : MonoBehaviour
 	public AnimationCurve enemySquadronSize;
 
 	public float enemyFormationOffset = 1.0f;
-	public float zPos = -0.25f;
 
 	public float spawnInterval = 15.0f;
 	private float timeSinceLastSpawn;
@@ -95,10 +94,6 @@ public class FreeEnemySpawner : MonoBehaviour
 
 	private Vector3 CalculateSquadPosition(int squadSize)
 	{
-		float xPos = Mathf.Clamp(Random.value, 0.2f, 0.8f) * Screen.width;
-		float yPos = Screen.height * 1.5f;
-		Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(xPos, yPos));
-		worldPos.z = zPos;
-		return worldPos;
+		return LevelComponent.Instance.GenerateRandomSpawnPosition();
 	}
 }
