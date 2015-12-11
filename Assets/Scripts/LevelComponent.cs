@@ -28,9 +28,9 @@ public class LevelComponent : MonoBehaviour
 	
 	}
 
-	public Vector3 GenerateRandomSpawnPosition()
+	public Vector3 GenerateRandomSpawnPosition(float safeZone)
 	{
-		float xPos = Mathf.Clamp(Random.value, 0.2f, 0.8f) * Screen.width;
+		float xPos = Mathf.Clamp(Random.value, safeZone, 1.0f - safeZone) * Screen.width;
 		float yPos = Screen.height * 1.5f;
 		Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(xPos, yPos));
 		worldPos.z = spawnZPosition;

@@ -4,6 +4,7 @@ using System.Collections;
 public class StructureSpawner : MonoBehaviour {
 
 	public GameObject[] structureTemplates;
+	public Sprite[] basicStructureSprites;
 
 	public float spawnInterval = 15.0f;
 	private float timeSinceLastSpawn;
@@ -34,7 +35,14 @@ public class StructureSpawner : MonoBehaviour {
 	{
 		if (structureTemplates != null && structureTemplates.Length > 0)
 		{
-			GameObject.Instantiate(structureTemplates[Random.RandomRange(0, structureTemplates.Length)], LevelComponent.Instance.GenerateRandomSpawnPosition(), Quaternion.identity);
+			GameObject go = GameObject.Instantiate(structureTemplates[Random.RandomRange(0, structureTemplates.Length)], LevelComponent.Instance.GenerateRandomSpawnPosition(-0.25f), Quaternion.identity) as GameObject;
+			
+			if (basicStructureSprites != null && basicStructureSprites.Length > 0)
+			{
+				SpriteRenderer spriteComp = go.GetComponent<SpriteRenderer>();
+				spriteComp.sprite = basicStructureSprites[Random.Range(0, basicStructureSprites.Length)];
+			}
+			
 		}
 	}
 }

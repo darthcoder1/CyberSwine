@@ -6,6 +6,9 @@ public class StructureComponent : MonoBehaviour
 	public bool useGlobalSpeed = true;
 	public float speed;
 
+	// a simple structure is just a sprite, no additional setup. If true, the sprite can be varied randomly by the spawner
+	public bool simpleStructure;
+
 	// Use this for initialization
 	void Start () 
 	{

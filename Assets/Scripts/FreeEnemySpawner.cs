@@ -94,6 +94,6 @@ public class FreeEnemySpawner : MonoBehaviour
 
 	private Vector3 CalculateSquadPosition(int squadSize)
 	{
-		return LevelComponent.Instance.GenerateRandomSpawnPosition();
+		return LevelComponent.Instance.GenerateRandomSpawnPosition(0.2f);
 	}
 }
